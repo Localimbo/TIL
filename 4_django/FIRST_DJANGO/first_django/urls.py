@@ -9,4 +9,5 @@ urlpatterns = [
     #path('index/', views.index),    # 해당 도메인에 들어오면은, views 파일에서 index 함수를 실행한다.
     #path('hello/<str:name>', views.hello),
     path('home/', include('home.urls')),    # home app의 url로 보내라! home의 url로 포워딩 하는 것! 얘가 담당함
+    path('utils/', include('utils.urls')),
 ]

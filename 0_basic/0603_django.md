@@ -16,6 +16,9 @@ $ django-admin startproject first_django
 
 # home이라는 이름을 가진 앱 추가 생성 
 $ django-admin startapp home
+
+# 실행 
+$ python manage.py runserver
 ```
 
 ## 
