@@ -1,4 +1,7 @@
 from flask import Flask, render_template
+import random
+import requests
+import json
 import lotto_package    ### .은 현재 내 위치를 의미. *는 전체를 의미
 
 app = Flask(__name__)
@@ -12,19 +15,20 @@ def lotto(num):
     bonus_number = real_data['bonus']
 
     result = lotto_package.get_result(real_numbers, lucky_numbers,  bonus_number)
-
+    print(real_data)
     return render_template(
     'lotto.html',
     result = result,
     real_numbers = real_numbers,
     lucky_numbers = lucky_numbers,
     bonus = bonus_number,
-    winning = data['firstAccumamnt']
+    # winning = lucky_numbers['firstAccumamnt']
         )
+
 
 # 랜덤한 거 뽑기
 def get_random_numbers():
-    numbers = random.sample((1, 46), 6)
+    numbers = random.sample(range(1, 46), 6)
     return sorted(numbers)
 
 #진짜 정보 가져오기
@@ -65,3 +69,5 @@ def get_result(real_list, random_list, bonus) :
         result = 5
 
     return result
+
+app.run(debug=True)

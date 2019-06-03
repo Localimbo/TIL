@@ -4,7 +4,7 @@ import json
 
 # 랜덤한 거 뽑기
 def get_random_numbers():
-    numbers = random.sample((1, 46), 6)
+    numbers = random.sample(range(1, 46), 6)
     return sorted(numbers)
 
 #진짜 정보 가져오기
@@ -13,6 +13,7 @@ def get_lotto_numbers(num):
     res = requests.get(url).text  # type == String
     data = json.loads(res)  # type == dict
     bonus_number = data['bnusNo']
+    # winning = data['firstAccumamnt']
 
     real_numbers = []
 
