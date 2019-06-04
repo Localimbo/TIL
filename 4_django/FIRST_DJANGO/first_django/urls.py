@@ -1,5 +1,5 @@
-# 얘는 마스터 url 기억기억 ~~~
-# 자잘한 애들은 건들이지 않고 정확해서 어느 하위 url로 보낼지를 지정해주는 것.
+# 얘는 <마스터 url> 기억기억 ~~~
+# 자잘한 애들은 건들이지 않고 정확하게 어느 하위 url로 보낼지를 지정해주는 것.
 from django.contrib import admin
 from django.urls import path, include
 
