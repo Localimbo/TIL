@@ -67,20 +67,26 @@ $ pip install django-extensions ipython ipython[notebook]
 
 1. models.py에서 rough 하게 만듬.  # 이것만 해도 상관은 ㄴㄴ
 
-2. # app 밑, migration 폴더 하위에 생성, 초벌번역해준다.
+2. # app 밑, migration 폴더 하위에 생성; 초벌번역해준다.
 $ python manage.py makemigrations board
 
-3. # board 앱에 있는 모든 mirgration이 적용됨
+3. # board 앱에 있는 모든 mirgration이 적용됨; 결제서류 get!
 $ python manage.py migrate board 
 ```
 
 : DB 내, board 안에 table 생성 완료  
+
+** Model 단계에서 초기에 표 설계, 저장할 테이블 구성이 매우 중요. 
+
+
 
 ### Sqllite viewer 에서 확인 
 
 #### open해서 table 생성된 지 확인 
 
 * 데이터베이스 열기 > TIL > django > db.sql3  
+
+
 
 ### Shell 사용
 
@@ -140,6 +146,17 @@ $ python manage.py shell_plus --notebook
 | `id` | Interger, Primary Keu |
 | `title` | CharField(max_length ==200) |
 | `content` | TextField() |
+
+
+
+## 장고 관리자 페이지 
+
+```sh
+1. python manage.py migrate => 모든 숨겨진 결재를 실행 
+2. python manage.py createsuperuser => 절대관리자를 생성
+3. DOMAIN/admin에 접속 
+4. Login
+```
 
 
 
