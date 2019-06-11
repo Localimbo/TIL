@@ -1,0 +1,11 @@
+{% extends 'articles/base.html' %}
+
+{% block body %}
+    <h1>현재 로그인한 유저 : {{user}}</h1>
+  <!--user에 속해 있는 댓글 가져오는 방법 -->
+    {% for comment in user.comment_set.all %}
+        <div class="alert alert-success" role="alert">
+            {{comment.content}}
+        </div>
+    {% endfor %}
+{% endblock %}

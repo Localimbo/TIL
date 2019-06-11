@@ -18,4 +18,12 @@ urlpatterns = [
     # Update
     # path('<int:article_id>/edit/', views.edit, name="edit"),  # 수정하기 위한 form 보여짐
     path('<int:article_id>/update/', views.update, name="update"),  # 수정한 결과 저장
+
+    # Comment 창 생성
+    path('<int:article_id>/comments/create/', views.comment_create, name="comment_create"),    # articles/4/comments/create
+
+    # Comment 창 delete
+    path('<int:article_id>/comments/<int:comment_id>/delete/', views.comment_delete, name="comment_delete"),
+
+    path('comment_all/', views.comment_all, name="comment_all"),
 ]
