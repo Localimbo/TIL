@@ -1,9 +1,16 @@
 <div class="card col-6 my-3">
-  <img src="https://picsum.photos/id/{{post.id}}/300/300" class="card-img-top" alt="...">
+    {% if post.image %}
+    <!-- post안에 image가 있으면, -->
+        <img src="{{post.image.url}}" class="card-img-top" alt="...">
+    {% else %}
+    <!--  없으면 lorem picsum에서 랜덤하게 끌어와 -->
+        <img src="https://picsum.photos/id/{{post.id}}/300/300" class="card-img-top" alt="...">
+    {% endif %}
   <div class="card-body">
 <!--    <h5 class="card-title">Card title</h5>-->
     <p class="card-text">{{post.content}}.</p>
 <!--    <a href="#" class="btn btn-primary">Go somewhere</a>-->
       <a class="btn btn-warning" href="{% url 'posts:update' post.id %}">수정</a>
+      <a class="btn btn-success" href="{% url 'posts:delete' post.id %}">삭제</a>
   </div>
 </div>

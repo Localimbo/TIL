@@ -3,7 +3,7 @@ from .forms import PostForm
 from .models import Post
 
 def index(request):
-    posts = Post.objects.all()
+    posts = Post.objects.all().order_by('-id')  # id 값 역순으로 정렬할꺼야~~ (-content) 도 가능!
     context = {
         'posts' : posts
     }
@@ -16,7 +16,7 @@ def create(request):
     if request.method == "POST":
         # 5. post 방식으로 저장요청을 받고, 데이터를 받아서 PostForm을 인스턴스화 한다.
         # 10. 데이터를 받아서 PostForm을 인스턴스화 한다.
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)  # 이미지 파일은 POST가 아닌 Files에 저장
         # 6. 데이터 검증을 한다.
         # 11. 데이터 검증을 한다.
         if form.is_valid():
@@ -52,4 +52,8 @@ def update(request, post_id):
         form = PostForm(instance=post)
     return render(request, 'posts/form.html', {'form':form})
 
+
 def delete(request, post_id):
+    post = Post.objects.get(id=post_id)
+    post.delete()
+    return redirect('posts:index')
