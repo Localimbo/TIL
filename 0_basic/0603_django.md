@@ -167,3 +167,17 @@ admin.site.register(Article)
 
 
 
+## 모델의 클래스 수정시, migration 작업 재실행 
+
+```python
+# models.py 폴더
+$ python manage.py makemigrations
+$ python manage.py migrate
+
+# admin.py 폴더
+from .models import Article, Comment
+admin.site.register(Comment)
+```
+
+
+
