@@ -181,3 +181,33 @@ admin.site.register(Comment)
 
 
 
+## forms.py 생성 
+
+```python
+model 알려주면 html 코드 자동으로 생성해줌
+model만 수정하면 형태는 장고가 알아서 변형해주는 것
+
+단점 : 비주얼 테러 
+
+html에서 <form> tag, <input> 제출 버튼 달아줘야 함 
+```
+
+
+
+
+
+## django bootstrap4 설치
+
+```python
+$ pip install django-bootstrap4
+
+settings.py INSTALLED_APPS에 
+ 'bootstrap4',
+]
+추가
+```
+
+
+
+pip install django-bootstrap4
+
