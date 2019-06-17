@@ -6,10 +6,13 @@ from django.contrib.auth import logout as auth_logout
 
 # 회원가입, Create 로직이랑 동일
 def signup(request):
+    if request.user.is_authenticated: # 로그인 했다면, user야 인증되있는 상태니?
+        return redirect("posts:index")    #너 로그인 했으니까 여기 안보여줌
     if request.method == "POST":                 # 저장
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            auth_login(request, user)
             return redirect('posts:index')
 
     else:                                        # get 방식으로 form 보여주기- 입력하게 폼 좀 줘봐
@@ -18,6 +21,8 @@ def signup(request):
 
 # login
 def login(request):
+    if request.user.is_authenticated: # 로그인 했다면, user야 인증되있는 상태니?
+        return redirect("posts:index")    #너 로그인 했으니까 여기 안보여줌
     if request.method == "POST":
         form = AuthenticationForm(request, request.POST)    # 해당 form은 request도 앞에 붙혀줘야 함. 그냥 문법이 다른거
         if form.is_valid():
