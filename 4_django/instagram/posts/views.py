@@ -95,4 +95,5 @@ def likes(request, post_id):
     else:
         # 좋아요 추가
         post.like_users.add(user)
-    return redirect("posts:index")
+    return redirect(f"/posts/#post_{post.id}")
+
