@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm # user를 create할 폼!
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import User
 
 # 회원가입, Create 로직이랑 동일
@@ -64,4 +64,22 @@ def follow(request, user_id):
             you.follower.add(me)         # 팔로우 추가
 
     return redirect('accounts:user_page', user_id)
+
+
+def update(request, user_id):
+    me = request.user
+    you = User.objects.get(id=user_id)
+    if me == you:                           # 자기자신만 if문 실행 가능해진다!
+        if request.method == "POST":
+            form = CustomUserChangeForm(request.POST, request.FILES, instance=you)   # 순서 중요!
+            if form.is_valid():
+                form.save()
+                return redirect("accounts:user_page", user_id)
+        else:
+            form = CustomUserChangeForm(instance=you)
+        context = {
+            'form': form
+        }
+        return render(request, 'accounts/update.html', context)
+    return redirect("posts:index")
 

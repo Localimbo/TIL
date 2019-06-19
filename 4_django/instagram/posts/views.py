@@ -2,9 +2,22 @@ from django.shortcuts import render, redirect
 from .forms import PostForm, CommentForm
 from .models import Post, Comment
 from django.contrib.auth.decorators import login_required
+from itertools import chain
 
-
+@login_required
 def index(request):
+    user_follow = request.user.follow.all()   # 지금 로그인 한 사람이 현재 팔로우하고 있는 사람들의 전체 리스트
+    follow_list = chain(user_follow, [request.user])    # 두 가지 정보를 연결시켜 저장
+    posts = Post.objects.order_by('-id').filter(user__in=follow_list) # 팔로우 한 사람만 보기
+    comment_form = CommentForm()
+    context = {
+        'posts': posts,
+        'comment_form': comment_form
+    }
+    return render(request, 'posts/index.html', context)
+
+
+def all (request):
     posts = Post.objects.all().order_by('-id')  # id 값 역순으로 정렬할꺼야~~ (-content) 도 가능!
     comment_form = CommentForm()
     context = {
@@ -12,6 +25,7 @@ def index(request):
         'comment_form': comment_form
     }
     return render(request, 'posts/index.html', context)
+
 
 @login_required()
 def create(request):
