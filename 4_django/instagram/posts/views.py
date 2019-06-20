@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from .forms import PostForm, CommentForm
-from .models import Post, Comment
+from .models import Post, HashTag
 from django.contrib.auth.decorators import login_required
 from itertools import chain
+from django.http import JsonResponse
 
 @login_required
 def index(request):
@@ -43,7 +44,17 @@ def create(request):
             # commit 을 False라고 하는 것은 아직 저장하지말고 기다려. git 에서 add한 이후 commit 하는 작업과 같이, 아직 유저 정보를 넣지 않았기 때문에! 데이터 칼럼을 채운 이후에 저장을 한다
             post = form.save(commit=False)
             post.user = request.user
-            post.save()
+            post.save()     # 저장이 된 후에 id값이 생성되면, post와 hashtag 연결 가능해진다.
+
+            # hashtag 추가
+            content = form.cleaned_data.get('content')    # cleaned_data : 살짝 다듬어진 데이터
+            words = content.split()
+            for word in words:
+                if word[0] == "#":
+                    # 해시태그 생성
+                    hashtag = HashTag.objects.get_or_create(content=word)  #이미 있을수도 있으니 생성하거나, 가져오기
+                    # post 모델과 연결
+                    post.hashtags.add(hashtag[0])
             return redirect("posts:index")
         else:
             # 7. 적절하지 않은 데이터가 들어온다.
@@ -69,6 +80,20 @@ def update(request, post_id):
             form = PostForm(request.POST, instance=post)
             if form.is_valid():
                 form.save()
+
+                # 기존의 N:N 관계를 삭제
+                post.hashtags.clear()
+                # hashtag 추가
+                content = form.cleaned_data.get('content')  # cleaned_data : 살짝 다듬어진 데이터
+                words = content.split()
+                for word in words:
+                    if word[0] == "#":
+                        # 해시태그 생성
+                        hashtag = HashTag.objects.get_or_create(content=word)  # 이미 있을수도 있으니 생성하거나, 가져오기
+                        # post 모델과 연결
+                        post.hashtags.add(hashtag[0])
+
+
                 return redirect("posts:index")
             else:
                 pass
@@ -101,13 +126,36 @@ def comment_create(request, post_id):
 def likes(request, post_id):
     user = request.user
     post = Post.objects.get(id=post_id)
+
     # 이미 좋아요가 눌려졌으면
     if user in post.like_users.all():      # 지금 로그인 한 사람이 like_users 컬럼에 속해있는지?
         # 좋아요 취소
         post.like_users.remove(user)
+        is_like = False
     # 좋아요 안했다면
     else:
         # 좋아요 추가
         post.like_users.add(user)
-    return redirect(f"/posts/#post_{post.id}")
+        is_like = True
+    context= {
+        'is_like' : is_like
+    }
+    return JsonResponse(context)
+    # return redirect("posts:index")
+\
 
+def hashtags(request, hashtag_id):               # all과 구조 거의 똑같음
+    hashtag = HashTag.objects.get(id=hashtag_id)
+    posts = hashtag.post_set.all() # 해쉬태그가 포함되어 있는 모든 게시물 리스트 가져오기 _set 사용
+    comment_form = CommentForm()
+    context = {
+        'posts': posts,
+        'comment_form': comment_form,
+        'hashtag' : hashtag,
+    }
+    return render(request, 'posts/index.html', context)
+
+
+def javascript(request):
+
+    return render(request, 'posts/js.html')

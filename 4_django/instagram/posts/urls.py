@@ -22,6 +22,12 @@ urlpatterns = [
     path('<int:post_id>/comments/create/', views.comment_create, name="comment_create"),
 
     # like
-    path('<int:post_id>/likes/', views.likes, name="likes")
+    path('<int:post_id>/likes/', views.likes, name="likes"),
+
+    # hashtag
+    path('hashtags/<int:hashtag_id>/', views.hashtags, name="hashtags"),
+
+    # Javascript test
+    path('test/', views.javascript, name="javascript")
 ]
 
