@@ -1,0 +1,136 @@
+# 0704 CSS 
+
+
+
+## 1. 선택자
+
+- 선택자 = 인간의 언어에서 주어에 해당하는 요소
+- 
+
+### (1) 선택자와 선언
+
+- CSS를 적용하고자 하는 대상태그 (선택자)   ex) li
+
+- 선택자에 적용할 디자인 (선언)    ex) {color:red}
+
+  - 선언 안에서 속성(color)과 속성값(red)을 구분하는 구분자 (콜론 :)
+
+  - 각 선언을 구분하는 구분자 (세미콜론 ;) 
+
+    구분하기 쉽게 줄바꿈 습관화.
+
+```html
+<head>  
+	<style>
+        li{
+            color:red;
+            text-decoration:underline;
+        }
+    </style>
+</head> 
+```
+
+
+
+### (2) 선택자의 종류
+
+#### 태그 선택자
+
+- (just태그이름 ex) li)모든 선택자에 디자인 적용
+
+#### 클래스 선택자
+
+- (.class 이름)여러 개의 태그를 클래스로 그루핑해서 디자인 적용
+
+#### 아이디 선택자
+
+- (#select  id이름)**고유한 하나**의 태그에만 아이디 부여해서 디자인 적용
+
+```html
+<style>
+      li{
+        color:red;
+        text-decoration:underline;
+      }
+      #select{
+        font-size:50px;
+      }
+      .deactive{
+        text-decoration : line-through;
+      }
+    </style>
+...
+	<li id="select">CSS</li>
+	<li class="deactive">HTML</li>
+	<li class="deactive">Javascript</li>
+
+```
+
+
+
+### (3) 부모 자식 선택자
+
+#### 조상 자손 선택자
+
+- ul li { } : 부모 자손 관계. 상위 태그 밑 모든 하위 태그들에 디자인 적용  
+
+```html
+<stlye>
+    ul li{
+        color:red;
+    }
+</stlye>
+...
+  <body>
+     <ul>
+       <li>HTML</li>
+       <li>CSS</li>
+       <li>JavaScript</li>
+     </ul>
+   </body>
+```
+
+
+
+#### 부모 자식 선택자
+
+- ul>li { } : 부모와 직계 자식 관계. 상위 태그 바로 하나 밑에 하위 태그에만 디자인 적용
+
+```html
+<stlye>
+    #lecture>li{
+        border:1px solid red;
+    }
+</stlye>
+...
+<ol id="lecture">
+   <li>HTML</li>
+   <li>CSS
+        <ol>
+          <li>selector</li>
+          <li>declaration</li>
+        </ol>
+    </li>
+</ol>
+```
+
+
+
+#### 동시 적용
+
+- ul,ol { } : 단순 열거. ul, ol에 똑같은 디자인 적용
+
+```html
+ul,ol{
+    background-color: powderblue;
+}
+```
+
+
+
+### (4) 공부 팁
+
+게임사이트 : <http://flukeout.github.io/>
+
+CSS cheet sheet selector 
+
