@@ -134,3 +134,50 @@ ul,ol{
 
 CSS cheet sheet selector 
 
+
+
+속성(property)내의, 
+
+## 2. 타이포그라피
+
+### (1)  font-size
+
+#### <단위>
+
+* px - 고정된 폰트의 크기를 지정 할 때 사용. 사용 비권장
+
+* em - 부모 태그 영향 받는 상대적인 크기. 사용 비권장
+
+* **rem** - html 태그의 폰트 크기에 따라서 상대적으로 크기가 결정되므로, 오늘날 환경에 가장 적합하고 바람직한 단위. 폰트크기를 조정 할 수 있는 사용자의 권리 보장. 
+
+  ex) mediun 1rem = 16px
+
+  ​	  very Large 1rem = 24px, 2rem = 48px
+
+```html
+  <head>
+    <style>
+      #px{font-size:16px;}
+      #rem{font-size:1rem;}
+    </style>
+  </head>
+  <body>
+    <div id="px">PX</div>
+    <div id="rem">REM</div>
+  </body>
+```
+
+
+
+
+
+### (2)
+
+### (3)
+
+### (4)
+
+
+
+
+
