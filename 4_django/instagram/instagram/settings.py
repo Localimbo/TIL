@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'posts',
+    'media',
     'bootstrap4',
     'imagekit',
     'accounts',
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+
     'allauth.socialaccount.providers.kakao',
 ]
 
@@ -133,6 +135,16 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # 변경되는 컴퓨터 환경에 맞춰서 알아서 경로 설정해주는 똑똑이 함수, BASE_DIR 가져오셈
 
 AUTH_USER_MODEL = 'accounts.User'
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
 SITE_ID = 1
+
 
 LOGIN_REDIRECT_URL = 'posts:all'
