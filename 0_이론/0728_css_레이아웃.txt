@@ -1,143 +1,6 @@
 
 
-# 0704 CSS 
-
-
-
-## 1. 선택자
-
-- 선택자 = 인간의 언어에서 주어에 해당하는 요소
-
-  
-
-### (1) 선택자와 선언
-
-- CSS를 적용하고자 하는 대상태그 (선택자)   ex) li
-
-- 선택자에 적용할 디자인 (선언)    ex) {color:red}
-
-  - 선언 안에서 속성(color)과 속성값(red)을 구분하는 구분자 (콜론 :)
-
-  - 각 선언을 구분하는 구분자 (세미콜론 ;) 
-
-    구분하기 쉽게 줄바꿈 습관화.
-
-```html
-<head>  
-	<style>
-        li{
-            color:red;
-            text-decoration:underline;
-        }
-    </style>
-</head> 
-```
-
-
-
-### (2) 선택자의 종류
-
-#### 태그 선택자
-
-- (just태그이름 ex) li)모든 선택자에 디자인 적용
-
-#### 클래스 선택자
-
-- (.class 이름)여러 개의 태그를 클래스로 그루핑해서 디자인 적용
-
-#### 아이디 선택자
-
-- (#select  id이름)**고유한 하나**의 태그에만 아이디 부여해서 디자인 적용
-
-```html
-<style>
-      li{
-        color:red;
-        text-decoration:underline;
-      }
-      #select{
-        font-size:50px;
-      }
-      .deactive{
-        text-decoration : line-through;
-      }
-    </style>
-...
-	<li id="select">CSS</li>
-	<li class="deactive">HTML</li>
-	<li class="deactive">Javascript</li>
-
-```
-
-
-
-### (3) 부모 자식 선택자
-
-#### 조상 자손 선택자
-
-- ul li { } : 부모 자손 관계. 상위 태그 밑 모든 하위 태그들에 디자인 적용  
-
-```html
-<stlye>
-    ul li{
-        color:red;
-    }
-</stlye>
-...
-  <body>
-     <ul>
-       <li>HTML</li>
-       <li>CSS</li>
-       <li>JavaScript</li>
-     </ul>
-   </body>
-```
-
-
-
-#### 부모 자식 선택자
-
-- ul>li { } : 부모와 직계 자식 관계. 상위 태그 바로 하나 밑에 하위 태그에만 디자인 적용
-
-```html
-<stlye>
-    #lecture>li{
-        border:1px solid red;
-    }
-</stlye>
-...
-<ol id="lecture">
-   <li>HTML</li>
-   <li>CSS
-        <ol>
-          <li>selector</li>
-          <li>declaration</li>
-        </ol>
-    </li>
-</ol>
-```
-
-
-
-#### 동시 적용
-
-- ul,ol { } : 단순 열거. ul, ol에 똑같은 디자인 적용
-
-```html
-ul,ol{
-    background-color: powderblue;
-}
-```
-
-
-
-### (4) 공부 팁
-
-게임사이트 : <http://flukeout.github.io/>
-
-CSS cheet sheet selector 
-
-
+# 0705 CSS 
 
 
 
@@ -153,17 +16,11 @@ CSS cheet sheet selector
 
 * em - 부모 태그 영향 받는 상대적인 크기. 사용 비권장
 
-* **rem** 
+* **rem** - html 태그의 폰트 크기에 따라서 상대적으로 크기가 결정되므로, 오늘날 환경에 가장 적합하고 바람직한 단위. 폰트크기를 조정 할 수 있는 사용자의 권리 보장. 
 
-  * html 태그의 폰트 크기에 따라서 상대적으로 크기가 결정되므로, 오늘날 환경에 가장 적합하고 바람직한 단위. 
+  ex) mediun 1rem = 16px
 
-  * 폰트크기를 조정 할 수 있는 사용자의 권리 보장. 
-  
-    ```
-  ex) 
-    mediun 1rem = 16px
-    very Large 1rem = 24px, 2rem = 48px
-    ```
+  ​	  very Large 1rem = 24px, 2rem = 48px
 
 ```html
   <head>
@@ -313,3 +170,147 @@ h1{
   </body>
 </html>
 ```
+
+
+
+## 3. 조화
+
+- 여러 효과가 엘리먼트를 두고 대치 할 때의 규칙들 파악
+
+  
+
+### (1) 상속
+
+- 부모 엘리먼트(태그)의 속성을 자식 엘리먼트가 물려받는 것
+- css에서 <u>생산성</u>을 높이기 위한 중요한 기능
+
+```html
+
+```
+
+
+
+### (2) Stylish
+
+#### 태그 선택자
+
+- (just태그이름 ex) li)모든 선택자에 디자인 적용
+
+#### 클래스 선택자
+
+- (.class 이름)여러 개의 태그를 클래스로 그루핑해서 디자인 적용
+
+#### 아이디 선택자
+
+- (#select  id이름)**고유한 하나**의 태그에만 아이디 부여해서 디자인 적용
+
+```html
+<style>
+      li{
+        color:red;
+        text-decoration:underline;
+      }
+      #select{
+        font-size:50px;
+      }
+      .deactive{
+        text-decoration : line-through;
+      }
+    </style>
+...
+	<li id="select">CSS</li>
+	<li class="deactive">HTML</li>
+	<li class="deactive">Javascript</li>
+
+```
+
+
+
+### (3) 캐스케이딩
+
+#### 조상 자손 선택자
+
+- ul li { } : 부모 자손 관계. 상위 태그 밑 모든 하위 태그들에 디자인 적용  
+
+```html
+<stlye>
+    ul li{
+        color:red;
+    }
+</stlye>
+...
+  <body>
+     <ul>
+       <li>HTML</li>
+       <li>CSS</li>
+       <li>JavaScript</li>
+     </ul>
+   </body>
+```
+
+
+
+#### 부모 자식 선택자
+
+- ul>li { } : 부모와 직계 자식 관계. 상위 태그 바로 하나 밑에 하위 태그에만 디자인 적용
+
+```html
+<stlye>
+    #lecture>li{
+        border:1px solid red;
+    }
+</stlye>
+...
+<ol id="lecture">
+   <li>HTML</li>
+   <li>CSS
+        <ol>
+          <li>selector</li>
+          <li>declaration</li>
+        </ol>
+    </li>
+</ol>
+```
+
+
+
+#### 동시 적용
+
+- ul,ol { } : 단순 열거. ul, ol에 똑같은 디자인 적용
+
+```html
+ul,ol{
+    background-color: powderblue;
+}
+```
+
+
+
+### (4) 공부 팁
+
+게임사이트 : <http://flukeout.github.io/>
+
+CSS cheet sheet selector
+
+ 
+
+## 4. 레이아웃
+
+### (1)  인라인 VS 블럭라벨
+
+### (2)  박스모델
+
+### (3)  box-sizing
+
+### (4)  마진겹침 현상
+
+### (5) 포지션
+
+### (6) flex
+
+### (7) meida query 
+
+### (8) float
+
+### (9) 다단
+
