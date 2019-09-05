@@ -1,0 +1,315 @@
+
+
+# 0704 CSS 
+
+
+
+## 1. 선택자
+
+- 선택자 = 인간의 언어에서 주어에 해당하는 요소
+
+  
+
+### (1) 선택자와 선언
+
+- CSS를 적용하고자 하는 대상태그 (선택자)   ex) li
+
+- 선택자에 적용할 디자인 (선언)    ex) {color:red}
+
+  - 선언 안에서 속성(color)과 속성값(red)을 구분하는 구분자 (콜론 :)
+
+  - 각 선언을 구분하는 구분자 (세미콜론 ;) 
+
+    구분하기 쉽게 줄바꿈 습관화.
+
+```html
+<head>  
+	<style>
+        li{
+            color:red;
+            text-decoration:underline;
+        }
+    </style>
+</head> 
+```
+
+
+
+### (2) 선택자의 종류
+
+#### 태그 선택자
+
+- (just태그이름 ex) li)모든 선택자에 디자인 적용
+
+#### 클래스 선택자
+
+- (.class 이름)여러 개의 태그를 클래스로 그루핑해서 디자인 적용
+
+#### 아이디 선택자
+
+- (#select  id이름)**고유한 하나**의 태그에만 아이디 부여해서 디자인 적용
+
+```html
+<style>
+      li{
+        color:red;
+        text-decoration:underline;
+      }
+      #select{
+        font-size:50px;
+      }
+      .deactive{
+        text-decoration : line-through;
+      }
+    </style>
+...
+	<li id="select">CSS</li>
+	<li class="deactive">HTML</li>
+	<li class="deactive">Javascript</li>
+
+```
+
+
+
+### (3) 부모 자식 선택자
+
+#### 조상 자손 선택자
+
+- ul li { } : 부모 자손 관계. 상위 태그 밑 모든 하위 태그들에 디자인 적용  
+
+```html
+<stlye>
+    ul li{
+        color:red;
+    }
+</stlye>
+...
+  <body>
+     <ul>
+       <li>HTML</li>
+       <li>CSS</li>
+       <li>JavaScript</li>
+     </ul>
+   </body>
+```
+
+
+
+#### 부모 자식 선택자
+
+- ul>li { } : 부모와 직계 자식 관계. 상위 태그 바로 하나 밑에 하위 태그에만 디자인 적용
+
+```html
+<stlye>
+    #lecture>li{
+        border:1px solid red;
+    }
+</stlye>
+...
+<ol id="lecture">
+   <li>HTML</li>
+   <li>CSS
+        <ol>
+          <li>selector</li>
+          <li>declaration</li>
+        </ol>
+    </li>
+</ol>
+```
+
+
+
+#### 동시 적용
+
+- ul,ol { } : 단순 열거. ul, ol에 똑같은 디자인 적용
+
+```html
+ul,ol{
+    background-color: powderblue;
+}
+```
+
+
+
+### (4) 공부 팁
+
+게임사이트 : <http://flukeout.github.io/>
+
+CSS cheet sheet selector 
+
+
+
+
+
+속성(property)내의, 
+
+## 2. 타이포그라피
+
+### (1)  font-size
+
+#### <단위>
+
+* px - 고정된 폰트의 크기를 지정 할 때 사용. 사용 비권장
+
+* em - 부모 태그 영향 받는 상대적인 크기. 사용 비권장
+
+* **rem** 
+
+  * html 태그의 폰트 크기에 따라서 상대적으로 크기가 결정되므로, 오늘날 환경에 가장 적합하고 바람직한 단위. 
+
+  * 폰트크기를 조정 할 수 있는 사용자의 권리 보장. 
+  
+    ```
+  ex) 
+    mediun 1rem = 16px
+    very Large 1rem = 24px, 2rem = 48px
+    ```
+
+```html
+  <head>
+    <style>
+      #px{font-size:16px;}
+      #rem{font-size:1rem;}
+    </style>
+  </head>
+  <body>
+    <div id="px">PX</div>
+    <div id="rem">REM</div>
+  </body>
+```
+
+
+
+### (2) color
+
+#### <컬러를 표현하는 세 가지 방법>
+
+- color name
+- hex - 16진수  ex) #FF0000
+- RGB - 빨,초,파  ex) rgb(256,0,0)
+
+```html
+<head>
+    <style>
+      h1{color:#00FF00;}
+    </style>
+  </head>
+  <body>
+    <h1>Hello world</h1>
+  </body>
+```
+
+
+
+### (3) text-align
+
+#### <속성>
+
+- left
+- right
+- center
+- justify
+
+```html
+ <head>
+    <style>
+      p{
+        text-align: justify;
+        border:1px solid gray;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras accumsan iaculis tristique. 
+    </p>
+  </body>
+```
+
+
+
+### (4) font
+
+- font family : 글꼴을 지정하는 속성 
+
+```html
+h1{
+    font-family: "Times New Roman", Times, serif;
+}
+```
+
+-> h1 태그 Times New Roman으로 지정(띄어쓰기 있을 시에는 큰따옴표 내에 작성). But, 사용자 컴퓨터에 해당 폰트 없으면 Times를 사용
+
+- font-weight : 폰트의 두께. bold만 기억하셈
+
+- line-height : 행과 행 사이 간격 지정. 기본값은 normal, 수치로는 1.2에 해당. 해당 수치 기준으로 간격 조정 가능
+
+- font : 폰트와 관련된 여러 속성 축약형으로 표현. 한 번에 표현 가능하며 순서 지켜서 기술
+
+  ```html
+  font: font-style font-variant font-weight font-size/line-height font-family|caption|icon|menu|message-box|small-caption|status-bar|initial|inherit; 
+  ```
+
+```html
+<html>
+  <head>
+    <style>
+      #type1{
+        font-size:5rem;
+        font-family: arial, verdana, "Helvetica Neue", serif;
+        font-weight: bold;
+        line-height: 2;
+      }
+      #type2{
+        font:bold 5rem/2 arial, verdana, "Helvetica Neue", serif;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="type1">
+      Hello world<br>
+      Hello world
+    </p>
+    <p id="type2">
+      Hello world<br>
+      Hello world
+    </p>
+  </body>
+</html>
+```
+
+
+
+### (5) web font
+
+: 사용자가 가지고 있지 않은 폰트를 웹페이지에서 사용하는 방법으로, 폰트를 서버에서 다운로드 하는 방식 사용
+
+#### 한국어 폰트 검색 :
+
+- font face generator검색 > web font generator클릭  >  사용 할 폰트 서버로 업로드 > download package클릭 > 파일디렉토리 ㄱ >  font-face 선택자에서 받은 폰트가 어떤 파일인지 확인 > 사용시에, font-family에 폰트와 폰트 파일 정의
+
+#### 구글 무료 폰트 사이트 : <https://fonts.google.com/?authuser=1>
+
+```html
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Londrina+Outline|Open+Sans+Condensed:300" rel="stylesheet">
+    <style>
+      #font1{
+        font-family: 'Open Sans Condensed', sans-serif;
+      }
+      #font2{
+        font-family: 'Indie Flower', cursive;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="font1">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+    </p>
+    <p id="font2">
+     Nulla ut urna purus. Curabitur ultricies rutrum orci malesuada tempor.
+    </p>
+  </body>
+</html>
+```
